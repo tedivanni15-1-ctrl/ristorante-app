@@ -10,7 +10,7 @@ L'architettura è divisa in **lato cliente** (prenotazioni, menu, feedback) e **
 ```
 ristorante-app/
 ├── client/          → Frontend  React 18 + Vite 5
-└── server/          → Backend   Node.js 20 + Express 4 + PostgreSQL 16
+└── server/          → Backend   Node.js 20 + Express 4 + PostgreSQL 18
 ```
 
 ### Stack tecnologico
