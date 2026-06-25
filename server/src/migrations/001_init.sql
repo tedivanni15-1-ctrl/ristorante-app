@@ -91,3 +91,18 @@ CREATE TABLE feedbacks (
 -- Seed minimo per sviluppo locale
 INSERT INTO tavoli (numero, capienza) VALUES (1, 2), (2, 4), (3, 4), (4, 6);
 INSERT INTO categorie (nome) VALUES ('Antipasti'), ('Primi'), ('Secondi'), ('Dolci');
+
+-- Tabella utenti staff
+CREATE TABLE IF NOT EXISTS utenti (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    ruolo VARCHAR(20) DEFAULT 'cameriere',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Utente di default: username=cameriere, password=trattoria123
+-- Hash bcrypt generato offline per sicurezza
+INSERT INTO utenti (username, password_hash, ruolo)
+VALUES ('cameriere', '$2b$10$hkGl6wc.GCiDIDNY2nvV/e7jnbaIncE4wU.Ce.8XmX8A.0AF6VcS.', 'cameriere')
+ON CONFLICT (username) DO NOTHING;

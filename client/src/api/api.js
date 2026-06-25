@@ -1,11 +1,16 @@
-// Wrapper leggero attorno a fetch per tutta l'app.
-// Tutte le chiamate API passano da qui: unico punto di errore.
+import { getToken } from "../context/AuthContext.jsx";
 
 const BASE = "/api/v1";
 
 async function http(path, options = {}) {
+  const token = getToken();
+
   const res = await fetch(`${BASE}${path}`, {
-    headers: { "Content-Type": "application/json", ...options.headers },
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers,
+    },
     ...options,
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
@@ -23,9 +28,9 @@ async function http(path, options = {}) {
 }
 
 export const api = {
-  get:    (path)         => http(path),
-  post:   (path, body)   => http(path, { method: "POST",   body }),
-  put:    (path, body)   => http(path, { method: "PUT",    body }),
-  patch:  (path, body)   => http(path, { method: "PATCH",  body }),
-  delete: (path)         => http(path, { method: "DELETE" }),
+  get:    (path)       => http(path),
+  post:   (path, body) => http(path, { method: "POST",   body }),
+  put:    (path, body) => http(path, { method: "PUT",    body }),
+  patch:  (path, body) => http(path, { method: "PATCH",  body }),
+  delete: (path)       => http(path, { method: "DELETE" }),
 };
