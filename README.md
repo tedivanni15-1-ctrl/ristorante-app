@@ -170,6 +170,6 @@ server/
 ---
 
 ## 👨‍💻 Autore
-
+**Tedi Vanni**
 Progetto sviluppato per il corso **ITS**.  
 Anno accademico 2025/2026.
