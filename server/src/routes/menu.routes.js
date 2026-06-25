@@ -5,12 +5,16 @@ import {
   updateMenuItem,
   deactivateMenuItem,
 } from "../controllers/menu.controller.js";
+import { requireAuth } from "../middlewares/requireAuth.js";
 
 const router = Router();
 
+// Pubblica — cliente può vedere il menu
 router.get("/", listMenu);
-router.post("/", createMenuItem);
-router.put("/:id", updateMenuItem);
-router.delete("/:id", deactivateMenuItem);
+
+// Protette — solo staff autenticato
+router.post("/", requireAuth, createMenuItem);
+router.put("/:id", requireAuth, updateMenuItem);
+router.delete("/:id", requireAuth, deactivateMenuItem);
 
 export default router;

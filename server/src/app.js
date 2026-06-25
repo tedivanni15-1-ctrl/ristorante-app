@@ -23,10 +23,10 @@ app.use("/api/v1/auth", authRouter);
 
 // Route pubbliche (cliente)
 app.use("/api/v1/reservations", reservationsRouter);
-app.use("/api/v1/menu", menuRouter);
+app.use("/api/v1/menu", menuRouter);          // GET pubblico, POST/PUT/DELETE protetti internamente
 app.use("/api/v1/feedbacks", feedbackRouter);
 
-// Route protette (solo staff autenticato)
+// Route protette (solo staff)
 app.use("/api/v1/tables", requireAuth, tablesRouter);
 app.use("/api/v1/orders", requireAuth, ordersRouter);
 
